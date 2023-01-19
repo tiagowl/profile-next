@@ -16,7 +16,6 @@ const theme = extendTheme({
         global:{
             body:{
                 bg: "gray.dark",
-                pt: "4",
                 pb: "4"
             },
         }

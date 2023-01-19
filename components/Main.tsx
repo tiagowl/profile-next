@@ -5,7 +5,7 @@ import Informations from "./Informations";
 export default function Main({children}){
     return(
         <Container maxWidth="1140px" pl="0" pr="0" >
-            <Flex flexDirection={["column", "row", "row"]} >
+            <Flex flexDirection={["column", "row", "row"]} pt={["0", "4", "4"]} >
                 <Flex w={["100%", "25%", "25%"]} h="auto" direction="column" mr="4" >
                     <Informations/>
                 </Flex>

@@ -24,11 +24,11 @@ export default function Informations(){
                 height="auto"
                 bg={["gray.dark", "gray.light", "gray.light"]}
                 border="none"
-                borderRadius="1rem"
+                borderRadius={["none", "1rem", "1rem"]}
             >
                 <Stack>
-                <CardHeader position="relative" display="flex" justifyContent="center" height={["5rem","12rem","12rem"]} backgroundSize="cover" backgroundImage={["none", "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"]}>
-                    <Avatar name='Segun Adebayo' size="lg" mt={["1.5rem", "8rem", "8rem"]} borderStyle="solid" borderWidth="5px" borderColor="gray.dark" src='https://bit.ly/sage-adebayo' />
+                <CardHeader position="relative" display="flex" justifyContent="center" height="12rem" backgroundSize="cover" backgroundImage="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60">
+                    <Avatar name='Segun Adebayo' size={["xl", "lg", "lg"]} mt={["6.5rem","8rem","8rem"]} borderStyle="solid" borderWidth="5px" borderColor="gray.dark" src='https://bit.ly/sage-adebayo' />
                 </CardHeader>
                 <CardBody borderBottomStyle="solid" borderBottomWidth="1px" borderColor="gray.dark" pb="1" pt="8" >
                     <Heading size='sm' color="white" textAlign="center">The perfect latte</Heading>
