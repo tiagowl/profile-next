@@ -28,3 +28,9 @@
 {
 	display: initial;
 }
+
+@media(max-width: 414px){
+	.scrollbar{
+		overflow-y: unset;
+	}
+}
