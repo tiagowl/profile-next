@@ -6,11 +6,11 @@ export default function Experiences() {
 
     return(
         <>
-            <Card bg="gray.light" w="100%" borderRadius="1rem">
-            <CardHeader pt="2" pb="0" >
+            <Card bg={["gray.dark","gray.light","gray.light"]} boxShadow={["none", "md", "md"]} w="100%"  borderRadius="1rem">
+            <CardHeader pt="2" pb="0" pl={["0", "4", "4"]} >
               <Heading size="sm" fontWeight="semibold" color="white" >Experiences</Heading>
             </CardHeader>
-            <CardBody>
+            <CardBody pl={["0", "4", "4"]} pr={["0", "4", "4"]} >
               {experiences?.map((experience)=>(
                 <Card maxW='md' mb="3" bg="gray.middle" borderRadius="1rem" >
                     <CardHeader pb="0" >

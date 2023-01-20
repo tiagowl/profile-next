@@ -8,6 +8,9 @@ import {ImList2} from "react-icons/im";
 import {GiHammerBreak} from "react-icons/gi";
 import {BrowserView, MobileView} from "react-device-detect";
 import { useEffect, useState } from "react";
+import Skills from "../components/Skills";
+import Formations from "../components/Formations";
+import Experiences from "../components/Experiences";
 
 export default function Home() {
 
@@ -345,10 +348,11 @@ export default function Home() {
               </Card>
             </TabPanel>
             <TabPanel>
-              <p>two!</p>
+              <Skills/>
             </TabPanel>
             <TabPanel>
-              <p>three!</p>
+              <Formations/>
+              <Experiences/>
             </TabPanel>
           </TabPanels>
         </Tabs>
