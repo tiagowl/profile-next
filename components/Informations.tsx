@@ -19,7 +19,8 @@ export default function Informations(){
     }
   }, []);   
 
-    if(show) return(
+    if(show){
+    } return(
         <>
             <Card
                 direction="column"
@@ -57,4 +58,5 @@ export default function Informations(){
             }
           </>
     );
+      
 }
