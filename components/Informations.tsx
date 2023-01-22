@@ -38,7 +38,7 @@ export default function Informations(){
                     <Heading size='sm' color="white" textAlign="center">Tiago Winkel Landi</Heading>
 
                     <Text py='2' fontSize="sm" color="white" textAlign="center">
-                    Olá, sou desenvolvedor web, apaixonado por aplicar soluções personalizadas afim de impactar a vida das pessoas através ferramentas web.
+                    Olá, sou desenvolvedor web, apaixonado por aplicar soluções personalizadas afim de impactar a vida das pessoas através de ferramentas web.
                     </Text>
                 </CardBody>
 
