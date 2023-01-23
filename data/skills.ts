@@ -8,6 +8,7 @@ const skills = ["React",
                 "Express", 
                 "Adonis", 
                 "Nest", 
-                "Redux"];
+                "Redux",
+                "Headless CMS's"];
 
 export default skills;
