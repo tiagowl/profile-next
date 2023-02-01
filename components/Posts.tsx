@@ -6,6 +6,7 @@ import { RiLoginCircleFill } from "react-icons/ri";
 import { TfiCommentAlt } from "react-icons/tfi";
 import {FcGoogle} from "react-icons/fc";
 import Likes from "./Likes";
+import Commentary from "./Comentary";
 
 export default function Posts(){
 
@@ -59,53 +60,10 @@ export default function Posts(){
             </Flex>
             
             <Collapse in={isOpen} >
-                {/* comentario */}  
-                <Flex direction="column" pl="4" borderTopStyle="solid" w="100%" pt="4" pb="4" borderTopWidth="1px" borderTopColor="gray.veryLight" >
-                    <Flex mb="2" >
-                        <Avatar size="sm" name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-                        <Text fontSize="sm" color="white" ml="2" fontWeight="bold" >Dan Abramov</Text>
-                    </Flex>
-                    <Flex>
-                        <Text fontSize="sm" color="white" >With Chakra UI, I wanted to sync the speed of development with the speed of design. I wanted the developer to be just as excited as the designer to create a screen.</Text>
-                    </Flex>
-                    <Flex mt="2" >
-                        <AiOutlineHeart color="white" size={22} />
-                        <Text fontSize="sm" ml="3" mr="3" color="gray.dark" fontWeight="bold" >Reply</Text>
-                        <Text fontSize="sm" mr="3" color="gray.veryLight" >6 hours</Text>
-                        <Text fontSize="sm" color="gray.veryLight" >1 like</Text>
-                    </Flex>
-                    {/* subcomentario */}
-                    <Flex direction="column" pl="6" w="100%" pt="4" pr="4" >
-                    <Flex mb="2" >
-                    <Avatar size="sm" name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-                    <Text fontSize="sm" color="white" ml="2" fontWeight="bold" >Dan Abramov</Text>
-                    </Flex>
-                    <Flex>
-                    <Text fontSize="sm" color="white" >With Chakra UI, I wanted to sync the speed of development with the speed of design. I wanted the developer to be just as excited as the designer to create a screen.</Text>
-                    </Flex>
-                    <Flex mt="2" >
-                    <AiOutlineHeart color="white" size={22} />
-                    <Text fontSize="sm" ml="3" mr="3" color="gray.dark" fontWeight="bold" >Reply</Text>
-                    <Text fontSize="sm" color="gray.veryLight" >6 hours</Text>
-                    </Flex>
-                    
-                </Flex>    
-                </Flex>
-                {/* comentario */}
-                <Flex direction="column" pl="4" borderTopStyle="solid" w="100%" pt="4" pb="4" borderTopWidth="1px" borderTopColor="gray.veryLight" >
-                    <Flex mb="2" >
-                    <Avatar size="sm" name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-                    <Text fontSize="sm" color="white" ml="2" fontWeight="bold" >Dan Abramov</Text>
-                    </Flex>
-                    <Flex>
-                    <Text fontSize="sm" color="white" >With Chakra UI, I wanted to sync the speed of development with the speed of design. I wanted the developer to be just as excited as the designer to create a screen.</Text>
-                    </Flex>
-                    <Flex mt="2" >
-                    <AiOutlineHeart color="white" size={22} />
-                    <Text fontSize="sm" ml="3" mr="3" color="gray.dark" fontWeight="bold" >Reply</Text>
-                    <Text fontSize="sm" color="gray.veryLight" >6 hours</Text>
-                    </Flex>
-                </Flex>
+                <Commentary>
+                    <Commentary subcommentary />
+                </Commentary>
+                <Commentary/>
             </Collapse>
             <CardFooter borderTopStyle="solid" pt="3" pb="3" borderTopWidth="2px" borderTopColor="gray.veryLight" >
                 <Flex display="flex" alignItems="center" justifyContent="space-between" w="100%">
@@ -157,6 +115,7 @@ export default function Posts(){
                 </Flex>
             </CardFooter>
             </Card>
+            {/* Likes */}
             <Modal isOpen={openModal}  onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent bg="gray.light" borderStyle="solid" borderColor="gray.veryLight" borderWidth="1px" >
@@ -182,6 +141,7 @@ export default function Posts(){
                 </ModalBody>
                 </ModalContent>
             </Modal>
+            {/* Login */}
             <Modal isOpen={loginModal} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent bg="white" pt="7" pb="5" >

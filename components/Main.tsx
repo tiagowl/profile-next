@@ -1,8 +1,13 @@
 import { Container, Flex } from "@chakra-ui/react";
+import { ReactNode } from "react";
 import Experiences from "./Experiences";
 import Informations from "./Informations";
 
-export default function Main({children}){
+interface Props{
+    children?: ReactNode;
+}
+
+export default function Main({children}: Props){
     return(
         <Container maxWidth="1140px" pl="0" pr="0" >
             <Flex flexDirection={["column", "row", "row"]} pt={["0", "4", "4"]} >
