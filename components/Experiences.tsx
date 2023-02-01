@@ -1,5 +1,4 @@
 import { Avatar, Box, Card, CardBody, CardHeader, Flex, Heading, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { experiences } from "../data/experiences";
 
 export default function Experiences() {

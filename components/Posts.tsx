@@ -62,6 +62,7 @@ export default function Posts(){
             <Collapse in={isOpen} >
                 <Commentary>
                     <Commentary subcommentary />
+                    <Commentary subcommentary />
                 </Commentary>
                 <Commentary/>
             </Collapse>

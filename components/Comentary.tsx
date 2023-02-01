@@ -1,4 +1,4 @@
-import { Avatar, Flex, Input, Text } from "@chakra-ui/react";
+import { Avatar, Flex, Text } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 
@@ -9,6 +9,7 @@ interface Props{
     likes?: number;
     children?: ReactNode;
     subcommentary?: boolean;
+    avatar_url?: string;
 }
 
 export default function Commentary({subcommentary, children}: Props) {
