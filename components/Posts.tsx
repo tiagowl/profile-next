@@ -1,12 +1,16 @@
-import { Image, Avatar, Box, Card, CardBody, CardFooter, CardHeader, Collapse, Flex, Heading, IconButton, Input, Text, useDisclosure } from "@chakra-ui/react";
+import { Image, Avatar, Box, Card, CardBody, CardFooter, CardHeader, Collapse, Flex, Heading, IconButton, Input, Text, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from "@chakra-ui/react";
+import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillPatchCheckFill, BsThreeDotsVertical } from "react-icons/bs";
 import { TfiCommentAlt } from "react-icons/tfi";
+import Likes from "./Likes";
 
 export default function Posts(){
 
-    const {isOpen, onToggle} = useDisclosure();
+    const {isOpen, onToggle, onClose} = useDisclosure();
+    const [openModal, setOpenModal] = useState(false);
 
+    
     return(
         <>        
             {/* Post */}
@@ -45,8 +49,10 @@ export default function Posts(){
                 alt='Chakra UI'
             />
             <Flex pl="4" pt="4" pb="4" >
-                <AiOutlineHeart color="white" size={25} />
-                <TfiCommentAlt onClick={onToggle} color="white" size={22} style={{marginTop: "3px", marginLeft: "10px"}} />
+                <AiOutlineHeart color="white" size={25} style={{cursor: "pointer"}} />
+                <TfiCommentAlt onClick={onToggle} color="white" size={22} style={{marginTop: "3px", marginLeft: "10px", cursor: "pointer"}} />
+                <Text color="white" cursor="pointer" onClick={()=>setOpenModal(true)} fontSize="xs" mt="1" ml="4" >1 Likes</Text>
+                <Text color="white" fontSize="xs" mt="1" ml="4" >1 Comments</Text>
             </Flex>
             
             <Collapse in={isOpen} >
@@ -100,7 +106,7 @@ export default function Posts(){
             <CardFooter borderTopStyle="solid" pt="3" pb="3" borderTopWidth="2px" borderTopColor="gray.veryLight" >
                 <Flex display="flex" alignItems="center" justifyContent="space-between" w="100%">
                 <Avatar borderWidth="3px" borderStyle="solid" borderColor="gray.dark" name='Kent Dodds' src='https://bit.ly/kent-c-dodds' />
-                <Input placeholder='Basic usage' size="lg" bg="gray.middle" border="none" w="27rem" />
+                <Input placeholder='Write your comment' size="lg" bg="gray.middle" border="none" w="27rem" />
                 </Flex>
             </CardFooter>
             </Card>
@@ -147,6 +153,25 @@ export default function Posts(){
                 </Flex>
             </CardFooter>
             </Card>
+            <Modal isOpen={openModal}  onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent bg="gray.light" borderStyle="solid" borderColor="gray.veryLight" borderWidth="1px" >
+                <ModalHeader color="white" >Curtidas</ModalHeader>
+                <ModalCloseButton color="white" onClick={()=>setOpenModal(false)} />
+                <ModalBody>
+                    <Flex direction="column" >
+                        <Flex alignItems="center" mb="3" >
+                            <Avatar name='Kent Dodds' src='https://bit.ly/kent-c-dodds' mr="3" />
+                            <Text color="white" >Kent Dodds</Text>
+                        </Flex>
+                        <Flex alignItems="center" mb="3"  >
+                            <Avatar name='Ryan Florence' mr="3" src='https://bit.ly/ryan-florence' />
+                            <Text color="white" >Ryan Florence</Text>
+                        </Flex>
+                    </Flex>
+                </ModalBody>
+                </ModalContent>
+            </Modal>
         </>
     )
 }
