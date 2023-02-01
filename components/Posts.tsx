@@ -1,14 +1,17 @@
-import { Image, Avatar, Box, Card, CardBody, CardFooter, CardHeader, Collapse, Flex, Heading, IconButton, Input, Text, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button } from "@chakra-ui/react";
+import { Image, Avatar, Box, Card, CardBody, CardFooter, CardHeader, Collapse, Flex, Heading, IconButton, Input, Text, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Square } from "@chakra-ui/react";
 import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
-import { BsFillPatchCheckFill, BsThreeDotsVertical } from "react-icons/bs";
+import { BsFillPatchCheckFill, BsGithub, BsLinkedin, BsThreeDotsVertical } from "react-icons/bs";
+import { RiLoginCircleFill } from "react-icons/ri";
 import { TfiCommentAlt } from "react-icons/tfi";
+import {FcGoogle} from "react-icons/fc";
 import Likes from "./Likes";
 
 export default function Posts(){
 
     const {isOpen, onToggle, onClose} = useDisclosure();
     const [openModal, setOpenModal] = useState(false);
+    const [loginModal, setLoginModal] = useState(false);
 
     
     return(
@@ -49,7 +52,7 @@ export default function Posts(){
                 alt='Chakra UI'
             />
             <Flex pl="4" pt="4" pb="4" >
-                <AiOutlineHeart color="white" size={25} style={{cursor: "pointer"}} />
+                <AiOutlineHeart onClick={()=>setLoginModal(true)} color="white" size={25} style={{cursor: "pointer"}} />
                 <TfiCommentAlt onClick={onToggle} color="white" size={22} style={{marginTop: "3px", marginLeft: "10px", cursor: "pointer"}} />
                 <Text color="white" cursor="pointer" onClick={()=>setOpenModal(true)} fontSize="xs" mt="1" ml="4" >1 Likes</Text>
                 <Text color="white" fontSize="xs" mt="1" ml="4" >1 Comments</Text>
@@ -59,16 +62,17 @@ export default function Posts(){
                 {/* comentario */}  
                 <Flex direction="column" pl="4" borderTopStyle="solid" w="100%" pt="4" pb="4" borderTopWidth="1px" borderTopColor="gray.veryLight" >
                     <Flex mb="2" >
-                    <Avatar size="sm" name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-                    <Text fontSize="sm" color="white" ml="2" fontWeight="bold" >Dan Abramov</Text>
+                        <Avatar size="sm" name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
+                        <Text fontSize="sm" color="white" ml="2" fontWeight="bold" >Dan Abramov</Text>
                     </Flex>
                     <Flex>
-                    <Text fontSize="sm" color="white" >With Chakra UI, I wanted to sync the speed of development with the speed of design. I wanted the developer to be just as excited as the designer to create a screen.</Text>
+                        <Text fontSize="sm" color="white" >With Chakra UI, I wanted to sync the speed of development with the speed of design. I wanted the developer to be just as excited as the designer to create a screen.</Text>
                     </Flex>
                     <Flex mt="2" >
-                    <AiOutlineHeart color="white" size={22} />
-                    <Text fontSize="sm" ml="3" mr="3" color="gray.dark" fontWeight="bold" >Reply</Text>
-                    <Text fontSize="sm" color="gray.veryLight" >6 hours</Text>
+                        <AiOutlineHeart color="white" size={22} />
+                        <Text fontSize="sm" ml="3" mr="3" color="gray.dark" fontWeight="bold" >Reply</Text>
+                        <Text fontSize="sm" mr="3" color="gray.veryLight" >6 hours</Text>
+                        <Text fontSize="sm" color="gray.veryLight" >1 like</Text>
                     </Flex>
                     {/* subcomentario */}
                     <Flex direction="column" pl="6" w="100%" pt="4" pr="4" >
@@ -156,22 +160,44 @@ export default function Posts(){
             <Modal isOpen={openModal}  onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent bg="gray.light" borderStyle="solid" borderColor="gray.veryLight" borderWidth="1px" >
-                <ModalHeader color="white" >Curtidas</ModalHeader>
+                <ModalHeader color="white" >Likes</ModalHeader>
                 <ModalCloseButton color="white" onClick={()=>setOpenModal(false)} />
                 <ModalBody>
                     <Flex direction="column" >
-                        <Flex alignItems="center" mb="3" >
-                            <Avatar name='Kent Dodds' src='https://bit.ly/kent-c-dodds' mr="3" />
-                            <Text color="white" >Kent Dodds</Text>
+                        <Flex alignItems="center" w="100%" justifyContent="space-between" mb="3" >
+                            <Flex alignItems="center">
+                                <Avatar name='Kent Dodds' src='https://bit.ly/kent-c-dodds' mr="3" />
+                                <Text color="white" >Kent Dodds</Text>
+                            </Flex>
+                            <Text color="gray.veryLight" >1 dia atrás</Text>
                         </Flex>
-                        <Flex alignItems="center" mb="3"  >
-                            <Avatar name='Ryan Florence' mr="3" src='https://bit.ly/ryan-florence' />
-                            <Text color="white" >Ryan Florence</Text>
+                        <Flex alignItems="center" w="100%" mb="3" justifyContent="space-between" >
+                            <Flex alignItems="center">
+                                <Avatar name='Ryan Florence' mr="3" src='https://bit.ly/ryan-florence' />
+                                <Text color="white" >Ryan Florence</Text>
+                            </Flex>
+                            <Text color="gray.veryLight" >1 dia atrás</Text>
                         </Flex>
                     </Flex>
                 </ModalBody>
                 </ModalContent>
             </Modal>
+            <Modal isOpen={loginModal} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent bg="white" pt="7" pb="5" >
+                    <ModalCloseButton color="gray.dark" onClick={()=>setLoginModal(false)} />
+                    <ModalBody display="flex" alignItems="center" flexDirection="column">
+                        <Square size="14" mb="4" boxShadow="lg" borderRadius="0.5rem" >
+                            <RiLoginCircleFill size="2.3rem" color="#363533" />
+                        </Square>
+                        <Text color="gray.dark" fontWeight="bold" fontSize="lg" >Sign In</Text>
+                        <Text color="gray.dark" mb="3" fontWeight="bold" fontSize="sm" >Click to sign in to comment or like posts</Text>
+                        <Button leftIcon={<FcGoogle size="1.2rem" />} w="100%" mb="2" border="2px solid" borderColor="#DCDCDC" bg="white" boxShadow="sm" fontSize="sm" >Login with google</Button>
+                        <Button leftIcon={<BsLinkedin size="1.2rem" color="#0A66C2" />} bg="white" mb="2" border="2px solid" borderColor="#DCDCDC" boxShadow="sm" w="100%" color="gray.dark" fontSize="sm" >Login with linkedin</Button>
+                        <Button leftIcon={<BsGithub size="1.2rem" color="#363533"  />} bg="white" border="2px solid" borderColor="#DCDCDC" boxShadow="sm" w="100%" color="gray.dark" fontSize="sm" >Login with github</Button>
+                    </ModalBody>
+                </ModalContent>
+      </Modal>
         </>
     )
 }
