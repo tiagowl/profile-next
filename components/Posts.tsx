@@ -1,11 +1,10 @@
-import { Image, Avatar, Box, Card, CardBody, CardFooter, CardHeader, Collapse, Flex, Heading, IconButton, Input, Text, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Square } from "@chakra-ui/react";
+import { Image, Avatar, Box, Card, CardBody, CardFooter, CardHeader, Collapse, Flex, Heading, IconButton, Input, Text, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, Square, SkeletonCircle, Skeleton } from "@chakra-ui/react";
 import { useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsFillPatchCheckFill, BsGithub, BsLinkedin, BsThreeDotsVertical } from "react-icons/bs";
 import { RiLoginCircleFill } from "react-icons/ri";
 import { TfiCommentAlt } from "react-icons/tfi";
 import {FcGoogle} from "react-icons/fc";
-import Likes from "./Likes";
 import Commentary from "./Comentary";
 
 export default function Posts(){
@@ -16,7 +15,14 @@ export default function Posts(){
 
     
     return(
-        <>        
+        <>
+            <Box display="none" padding='6' bg="gray.light" boxShadow='lg' borderRadius="1rem">
+                <SkeletonCircle size='10' startColor="gray.midddle" endColor="gray.veryLight" mb="2" />
+                <Skeleton height='20px' startColor="gray.midddle" endColor="gray.veryLight" mb="2" />
+                <Skeleton height='20px' startColor="gray.midddle" endColor="gray.veryLight" mb="2" />
+                <Skeleton height='20px' startColor="gray.midddle" endColor="gray.veryLight" width="50%" mb="6" />
+                <Skeleton height='140px' startColor="gray.midddle" endColor="gray.veryLight" mb="2" />
+            </Box>        
             {/* Post */}
             <Card width="100%" bg="gray.light" mb="3" borderRadius="1rem">
             <CardHeader>
@@ -54,7 +60,7 @@ export default function Posts(){
             />
             <Flex pl="4" pt="4" pb="4" >
                 <AiOutlineHeart onClick={()=>setLoginModal(true)} color="white" size={25} style={{cursor: "pointer"}} />
-                <TfiCommentAlt onClick={onToggle} color="white" size={22} style={{marginTop: "3px", marginLeft: "10px", cursor: "pointer"}} />
+                <TfiCommentAlt color="white" onClick={onToggle} size={22} style={{marginTop: "3px", marginLeft: "10px", cursor: "pointer"}} />
                 <Text color="white" cursor="pointer" onClick={()=>setOpenModal(true)} fontSize="xs" mt="1" ml="4" >1 Likes</Text>
                 <Text color="white" fontSize="xs" mt="1" ml="4" >1 Comments</Text>
             </Flex>
