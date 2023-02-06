@@ -1,6 +1,7 @@
 import { Avatar, Flex, Text } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
+import { BsThreeDots } from "react-icons/bs";
 
 interface Props{
     username?: string;
@@ -12,21 +13,23 @@ interface Props{
     avatar_url?: string;
 }
 
-export default function Commentary({subcommentary, children}: Props) {
+export default function Commentary({subcommentary, children, content, avatar_url, username, likes}: Props) {
     return (
         <Flex direction="column" pl={subcommentary ? "6" : "4"} borderTopStyle={subcommentary ? "none" : "solid"} w="100%" pt="4" pb={subcommentary ? "1" : "4"} borderTopWidth="1px" borderTopColor="gray.veryLight" >
-            <Flex mb="2" >
-                <Avatar size="sm" name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-                <Text fontSize="sm" color="white" ml="2" fontWeight="bold" >Dan Abramov</Text>
+            <Flex mb="2" justifyContent="space-between" w="100%" pr="4" >
+                <Flex>
+                    <Avatar size="sm" name='Dan Abrahmov' src={avatar_url} />
+                    <Text fontSize="sm" color="white" ml="2" fontWeight="bold" >{username}</Text>
+                </Flex>
+                <BsThreeDots size="1.2rem" />
             </Flex>
             <Flex>
-                <Text fontSize="sm" color="white" >With Chakra UI, I wanted to sync the speed of development with the speed of design. I wanted the developer to be just as excited as the designer to create a screen.</Text>
+                <Text fontSize="sm" color="white" >{content}</Text>
             </Flex>
             <Flex mt="2" >
                 <AiOutlineHeart color="white" size={22} />
-                <Text fontSize="sm" ml="3" mr="3" color="gray.dark" fontWeight="bold" >Reply</Text>
-                <Text fontSize="sm" mr="3" color="gray.veryLight" >6 hours</Text>
-                <Text fontSize="sm" color="gray.veryLight" >1 like</Text>
+                <Text fontSize="sm" mr="3" ml="3" color="gray.dark" >6 hours</Text>
+                <Text fontSize="sm" color="gray.veryLight" >{likes} like</Text>
             </Flex>
             {children}
         </Flex>

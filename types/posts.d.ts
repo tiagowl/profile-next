@@ -1,15 +1,15 @@
-import { Comment } from "../backend/models/comments";
+import Comment from "./comments";
 import Image from "./images";
 import Response from "./responses";
 
-interface Posts{
+export default interface Posts{
     id: number;
     attributes:{
         content: string;
         createdAt: Date;
         updatedAt: Date;
         publishedAt: Date;
-        image:Response<Image>;
+        image:Image;
         comments: Response<Comment>;
     }
 }
