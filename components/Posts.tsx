@@ -35,7 +35,7 @@ export default function Posts(){
                     <Text fontSize="sm" color="white" >
                     {post.content}
                     </Text>
-                    <Link href={post.link} fontSize="sm" color="white" >Link do projeto</Link>
+                    <Link href={post.link} fontSize="sm" color="blue.300" >Link do projeto</Link>
                 </CardBody>
                 <Image
                     objectFit='cover'

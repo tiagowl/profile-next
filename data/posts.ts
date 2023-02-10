@@ -28,6 +28,11 @@ const Posts = [
         content: "Buscando me desafiar cada dia, me familiarizando com ferramentas diferentes, criei um pequeno projeto simulando comentários, utilizando Vue.js na versão 3, Vuex e Tailwind.",
         image: "https://lwkmlooalsnjgtavtcoo.supabase.co/storage/v1/object/sign/profile/comments.PNG?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwcm9maWxlL2NvbW1lbnRzLlBORyIsImlhdCI6MTY3NDIyNTU5MywiZXhwIjoxNzA1NzYxNTkzfQ.GEXJS2fLwnDUHYbnUIgzIt3_HFauWbFCwSASKBcSq2M&t=2023-01-20T14%3A39%3A54.238Z",
         link: "https://comments-indol.vercel.app/"
+    },
+    {
+        content: "Descubra como fazer receita passiva e ativa através da internet sem precisar vender nada, acesse a aula gratuita sobre como funciona o projeto.",
+        image: "https://res.cloudinary.com/dc7iitoaq/image/upload/v1676055053/GRAP_propaganda_mcx4df.png",
+        link: "https://bit.ly/Superclass_Gratuita"
     }
 ]
 
