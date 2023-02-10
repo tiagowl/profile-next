@@ -39,7 +39,7 @@ export default function Home() {
         <Card borderRadius="1rem" bg="gray.light" mb="3">
           <CardBody padding="4" >
             <Flex>
-              <Avatar borderWidth="3px" size="md" borderStyle="solid" borderColor="gray.dark" />
+              <Avatar borderWidth="3px" size="md" bg="gray.veryLight" borderStyle="solid" borderColor="gray.dark" />
               <Input type="text" size="lg" border="None" bg="gray.middle" ml="2"></Input>
             </Flex>
             <Flex pl="14" mt="3" justifyContent="space-between" >

@@ -9,6 +9,7 @@ import Commentary from "./Comentary";
 import Response from "../types/responses";
 import PostsResponse from "../types/posts";
 import useFetch from "use-http";
+import {useAuth0} from "@auth0/auth0-react";
 
 export default function Posts(){
 
@@ -18,6 +19,12 @@ export default function Posts(){
     const [posts, setPosts] = useState<Response<PostsResponse>>();
     const [commentsModal, setCommentsModal] = useState(false);
     const { get, post, response, loading} = useFetch('https://profile-cms-production.up.railway.app/api');
+    const [commentBody, setCommentBody] = useState();
+    const { loginWithRedirect } = useAuth0();
+
+    const likePost = () => {
+        loginWithRedirect();
+    }
 
     const loadPosts = async() =>{
         let posts = await get("/posts?populate=*");
@@ -71,7 +78,7 @@ export default function Posts(){
                 alt='Chakra UI'
             />
             <Flex pl="4" pt="4" pb="4" >
-                <AiOutlineHeart onClick={()=>setLoginModal(true)} color="white" size={25} style={{cursor: "pointer"}} />
+                <AiOutlineHeart onClick={()=>likePost()} color="white" size={25} style={{cursor: "pointer"}} />
                 {post?.attributes?.comments?.data?.length > 0 && <TfiCommentAlt color="white" onClick={onToggle} size={22} style={{marginTop: "3px", marginLeft: "10px", cursor: "pointer"}} />}
                 <Text color="white" cursor="pointer" onClick={()=>setOpenModal(true)} fontSize="xs" mt="1" ml="4" >1 Likes</Text>
                 {post?.attributes?.comments?.data?.length > 0 && <Text color="white" fontSize="xs" mt="1" ml="4" >{post?.attributes?.comments?.data?.length} comments</Text>}

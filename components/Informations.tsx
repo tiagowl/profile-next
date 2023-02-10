@@ -1,5 +1,4 @@
-import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading, Image, ListItem, Stack, Tag, Text, UnorderedList } from "@chakra-ui/react";
-import skills from "../data/skills";
+import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Heading, Stack, Text } from "@chakra-ui/react";
 import {isMobile} from "react-device-detect";
 import { useEffect, useState } from "react";
 import Skills from "./Skills";
