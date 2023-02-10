@@ -30,7 +30,7 @@ const Posts = [
         link: "https://comments-indol.vercel.app/"
     },
     {
-        content: "Descubra como fazer receita passiva e ativa através da internet sem precisar vender nada, acesse a aula gratuita sobre como funciona o projeto.",
+        content: "Descubra como fazer receita passiva e ativa através da internet sem precisar vender nada, acesse a aula gratuita sobre como funciona o projeto no link abaixo.",
         image: "https://res.cloudinary.com/dc7iitoaq/image/upload/v1676055053/GRAP_propaganda_mcx4df.png",
         link: "https://bit.ly/Superclass_Gratuita"
     }
