@@ -20,10 +20,22 @@ export default function Posts(){
     const [commentsModal, setCommentsModal] = useState(false);
     const { get, post, response, loading} = useFetch('https://profile-cms-production.up.railway.app/api');
     const [commentBody, setCommentBody] = useState();
-    const { loginWithRedirect } = useAuth0();
+    const { loginWithRedirect, user, isLoading, isAuthenticated } = useAuth0();
 
-    const likePost = () => {
+    const signUp = () =>{
         loginWithRedirect();
+        if(user?.name && user?.picture){
+            localStorage.setItem("username", user?.name as string);
+            localStorage.setItem("user_avatar", user?.picture as string);
+        }
+    }
+
+    const likePost = (event: Event) => {
+        loginWithRedirect();
+        if(user){
+            localStorage.setItem("username", user?.name as string);
+            localStorage.setItem("user_avatar", user?.picture as string);
+        }
     }
 
     const loadPosts = async() =>{
