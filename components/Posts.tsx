@@ -13,7 +13,7 @@ export default function Posts(){
                 <CardHeader>
                     <Flex>
                     <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                        <Avatar borderWidth="3px" borderStyle="solid" borderColor="gray.dark" name='Segun Adebayo' src='https://scontent-gru1-1.xx.fbcdn.net/v/t39.30808-1/260771930_437837497914364_1749631706274113420_n.jpg?stp=dst-jpg_p200x200&_nc_cat=101&ccb=1-7&_nc_sid=7206a8&_nc_eui2=AeFHPXBzZ0Na9ICQtssu-sBGz7R_G15DyQTPtH8bXkPJBPrxMIJpURTLSECc7Div1iS_ZxY2yDe244NHCfYu7b29&_nc_ohc=t408g1y7dlEAX_jSZxu&_nc_ht=scontent-gru1-1.xx&oh=00_AfDvELWbWITxt3iv1RWUAwUAAVKF0gv7S3zTP3fm8dHubQ&oe=63CF25C3' />
+                        <Avatar borderWidth="3px" borderStyle="solid" borderColor="gray.dark" name='Segun Adebayo' src='/avatar_profile.jpg' />
 
                         <Box>
                         <Heading size='sm' color="white" fontWeight="normal">Tiago Winkel Landi</Heading>
