@@ -10,6 +10,7 @@ import Skills from "../components/Skills";
 import Formations from "../components/Formations";
 import Experiences from "../components/Experiences";
 import Posts from "../components/Posts";
+import Tools from "../components/Tools";
 
 export default function Home() {
 
@@ -78,6 +79,7 @@ export default function Home() {
             <TabPanel>
               <Formations/>
               <Experiences/>
+              <Tools/>
             </TabPanel>
           </TabPanels>
         </Tabs>

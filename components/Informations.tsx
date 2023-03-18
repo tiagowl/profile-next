@@ -4,7 +4,9 @@ import {isMobile} from "react-device-detect";
 import { useEffect, useState } from "react";
 import Skills from "./Skills";
 import Formations from "./Formations";
+import {SiChakraui, SiNextdotjs, SiStrapi, SiSupabase} from "react-icons/si"
 import {useRouter} from "next/router";
+import Tools from "./Tools";
 
 export default function Informations(){
 
@@ -54,6 +56,7 @@ export default function Informations(){
                 <>    
                     <Skills/>
                     <Formations/>
+                    <Tools/>
                 </>
             }
           </>
