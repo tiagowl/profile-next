@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input } from "@chakra-ui/react";
+import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input, Circle } from "@chakra-ui/react";
 import { BsFillPatchCheckFill, BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { TfiCommentAlt } from "react-icons/tfi";
@@ -6,6 +6,7 @@ import { useState } from "react";
 import Commentary from "./Commentary";
 import Post from "../types/post";
 import { ResponseModel } from "../types/response";
+import TimeAgo from "react-timeago";
 
 interface Props{
     posts: ResponseModel<Post>
@@ -76,7 +77,9 @@ export default function Post(props: Props){
                                     <Avatar name='Kent Dodds' src={like.attributes.avatar_url} mr="3" />
                                     <Text color="white" >{like.attributes.name}</Text>
                                 </Flex>
-                                <Text color="gray.veryLight" >1 dia atrás</Text>
+                                <Text color="white" >
+                                    <TimeAgo date={like.attributes.createdAt} />
+                                </Text>
                             </Flex>
                         ))}
                     </Flex>
@@ -124,7 +127,7 @@ export default function Post(props: Props){
                         <Text color="white" >3 commentaries</Text>
                     </Flex>
                     {posts?.attributes?.comments?.data?.map((comment)=>(
-                        <Commentary avatar_url={comment.attributes.avatar_url} username={comment.attributes.name} content={comment.attributes.text} />
+                        <Commentary created_at={comment.attributes.createdAt} avatar_url={comment.attributes.avatar_url} username={comment.attributes.name} content={comment.attributes.text} />
                     ))}
                 </ModalBody>
 

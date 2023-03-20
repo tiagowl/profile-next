@@ -1,6 +1,7 @@
 import { Avatar, Flex, Text } from "@chakra-ui/react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
+import TimeAgo from "react-timeago";
 
 interface Props{
     username?: string;
@@ -10,7 +11,7 @@ interface Props{
     avatar_url?: string;
 }
 
-export default function Commentary({content, avatar_url, username, likes}: Props) {
+export default function Commentary({content, avatar_url, username, likes, created_at}: Props) {
     return (
         <Flex direction="column" w="100%" px="3" mb="2" pt="4" borderTopWidth="1px" borderTopColor="gray.veryLight" >
             <Flex mb="2" justifyContent="space-between" w="100%" pr="4" >
@@ -25,7 +26,9 @@ export default function Commentary({content, avatar_url, username, likes}: Props
             </Flex>
             <Flex mt="2" >
                 <AiOutlineHeart color="white" size={22} />
-                <Text fontSize="sm" mr="3" ml="3" color="gray.dark" >6 hours</Text>
+                <Text fontSize="sm" mr="3" ml="3" color="gray.veryLight" >
+                    <TimeAgo date={created_at as Date} />
+                </Text>
                 <Text fontSize="sm" color="gray.veryLight" >{likes} like</Text>
             </Flex>
         </Flex>
