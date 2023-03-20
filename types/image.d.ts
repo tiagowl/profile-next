@@ -1,5 +1,7 @@
 export interface Image{
     data: {
-        url: string;
+        attributes:{
+            url: string;
+        }
     }
 }

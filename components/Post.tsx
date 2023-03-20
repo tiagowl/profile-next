@@ -1,21 +1,22 @@
-import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Link, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input } from "@chakra-ui/react";
+import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input } from "@chakra-ui/react";
 import { BsFillPatchCheckFill, BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { useState } from "react";
 import Commentary from "./Commentary";
+import Post from "../types/post";
+import { ResponseModel } from "../types/response";
 
 interface Props{
-    content: string;
-    link: string;
-    image: string;
+    posts: ResponseModel<Post>
 }
 
-export default function Post({content, link, image}: Props){
+export default function Post(props: Props){
 
     const {isOpen, onToggle, onClose} = useDisclosure();
     const [openModal, setOpenModal] = useState(false);
     const [modalComments, setOpenModalComments] = useState(false);
+    const posts = props.posts;
 
 
     return(
@@ -44,20 +45,19 @@ export default function Post({content, link, image}: Props){
                     </CardHeader>
                     <CardBody pt="0" >
                         <Text fontSize="sm" color="white" >
-                        {content}
+                            {posts.attributes.Text}
                         </Text>
-                        <Link href={link} fontSize="sm" color="blue.300" >Link do projeto</Link>
                     </CardBody>
                     <Image
                         objectFit='cover'
-                        src={image}
+                        src={posts.attributes.image.data.attributes.url}
                         alt='Chakra UI'
                     />
                     <Flex pl="4" pt="4">
                         <AiOutlineHeart color="white" size={25} style={{cursor: "pointer"}} />
-                        <TfiCommentAlt color="white" size={22} style={{marginTop: "3px", marginLeft: "10px", cursor: "pointer"}} />
-                        <Text color="white" cursor="pointer"  fontSize="xs" mt="1" ml="4" onClick={()=>setOpenModal(true)} >1 Likes</Text>
-                        <Text color="white" fontSize="xs" onClick={()=>setOpenModalComments(true)} cursor="pointer" mt="1" ml="4" > 2 comments</Text>
+                        <TfiCommentAlt color="white" size={22} onClick={()=>setOpenModalComments(true)} style={{marginTop: "3px", marginLeft: "10px", cursor: "pointer"}} />
+                        {posts.attributes.likes.data.length > 0 && <Text color="white" cursor="pointer"  fontSize="xs" mt="1" ml="4" onClick={()=>setOpenModal(true)} > {posts.attributes.likes.data.length} Likes</Text>}
+                        {posts.attributes.comments.data.length > 0 && <Text color="white" fontSize="xs" onClick={()=>setOpenModalComments(true)} cursor="pointer" mt="1" ml="4" > {posts.attributes.comments.data.length} comments</Text>}
                     </Flex>
                     <CardFooter borderTopStyle="solid" pt="3" pb="1">
                         
@@ -70,20 +70,15 @@ export default function Post({content, link, image}: Props){
                 <ModalCloseButton color="white" onClick={()=>setOpenModal(false)} />
                 <ModalBody borderTop="1px solid" borderTopColor="gray.veryLight" >
                     <Flex direction="column" >
-                        <Flex alignItems="center" w="100%" justifyContent="space-between" mb="3" >
-                            <Flex alignItems="center">
-                                <Avatar name='Kent Dodds' src='https://bit.ly/kent-c-dodds' mr="3" />
-                                <Text color="white" >Kent Dodds</Text>
+                        {posts?.attributes?.likes?.data?.map((like)=>(
+                            <Flex alignItems="center" w="100%" justifyContent="space-between" mb="3" >
+                                <Flex alignItems="center">
+                                    <Avatar name='Kent Dodds' src={like.attributes.avatar_url} mr="3" />
+                                    <Text color="white" >{like.attributes.name}</Text>
+                                </Flex>
+                                <Text color="gray.veryLight" >1 dia atrás</Text>
                             </Flex>
-                            <Text color="gray.veryLight" >1 dia atrás</Text>
-                        </Flex>
-                        <Flex alignItems="center" w="100%" mb="3" justifyContent="space-between" >
-                            <Flex alignItems="center">
-                                <Avatar name='Ryan Florence' mr="3" src='https://bit.ly/ryan-florence' />
-                                <Text color="white" >Ryan Florence</Text>
-                            </Flex>
-                            <Text color="gray.veryLight" >1 dia atrás</Text>
-                        </Flex>
+                        ))}
                     </Flex>
                 </ModalBody>
                 </ModalContent>
@@ -114,23 +109,23 @@ export default function Post({content, link, image}: Props){
                             />
                     </Flex>
                     <Flex px="2" mt="2" mb="2" >
-                        <Text color="white" >{content}</Text>
+                        <Text color="white" >{posts.attributes.Text}</Text>
                     </Flex>
                     <Image
                         objectFit='cover'
-                        src={image}
+                        src={posts.attributes.image.data.attributes.url}
                         alt='Chakra UI'
                     />
-                    <Flex justifyContent="space-between" px="3" mt="2" mb="2" >
+                    <Flex justifyContent="space-between" px="3" mt="2" mb={posts?.attributes?.comments?.data?.length > 0 ? "2" : "0"} >
                         <Flex>
                             <AiOutlineHeart color="white" size={25} style={{cursor: "pointer"}} />
                             <Text color="white" ml="2" cursor="pointer" onClick={()=>setOpenModal(true)}  >1 likes</Text>
                         </Flex>
                         <Text color="white" >3 commentaries</Text>
                     </Flex>
-                    <Commentary/>
-                    <Commentary/>
-                    <Commentary/>
+                    {posts?.attributes?.comments?.data?.map((comment)=>(
+                        <Commentary avatar_url={comment.attributes.avatar_url} username={comment.attributes.name} content={comment.attributes.text} />
+                    ))}
                 </ModalBody>
 
                 <ModalFooter borderTop="1px solid" borderTopColor="gray.veryLight" px="0" >

@@ -4,7 +4,5 @@ interface ResponseModel<T>{
 }
 
 export interface Response<T> {
-    data: [
-        ResponseModel<T>[]
-    ]
+    data: ResponseModel[]
 }
