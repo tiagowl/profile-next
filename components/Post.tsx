@@ -1,15 +1,24 @@
-import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input, Circle } from "@chakra-ui/react";
+import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input, Circle, Link } from "@chakra-ui/react";
 import { BsFillPatchCheckFill, BsThreeDotsVertical } from "react-icons/bs";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { TfiCommentAlt } from "react-icons/tfi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Commentary from "./Commentary";
 import Post from "../types/post";
 import { ResponseModel } from "../types/response";
 import TimeAgo from "react-timeago";
+import { useAuth0 } from "@auth0/auth0-react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import useFetch from "use-http";
+import {useRouter} from "next/router";
 
 interface Props{
-    posts: ResponseModel<Post>
+    posts: ResponseModel<Post>,
+    handleChange: () => void
+}
+
+interface PropsHeartIcon{
+    id: number;
 }
 
 export default function Post(props: Props){
@@ -18,6 +27,90 @@ export default function Post(props: Props){
     const [openModal, setOpenModal] = useState(false);
     const [modalComments, setOpenModalComments] = useState(false);
     const posts = props.posts;
+    const { loginWithRedirect, user, isLoading, isAuthenticated } = useAuth0();
+    const [avatarUrl, setAvatar] = useState<string | null>();
+    const [like, setLike] = useState(false);
+    const [indexPost, setIndex] = useState(0);
+    const { get, post, response, loading} = useFetch(process.env.NEXT_PUBLIC_API);
+    const [comment, setComment] = useState("");
+    const router = useRouter();
+
+    const signUp = () =>{
+        loginWithRedirect();
+    }
+
+    const likeComment = async (id: number) => {
+        if(avatarUrl != ""){
+            setIndex(id);
+            setLike(true);
+            await post("/likes", {
+                data:{
+                    avatar_url: avatarUrl,
+                    name: localStorage.getItem("username"),
+                    post: {
+                        id: id
+                    }
+                }
+            })
+            if(response.status === 200){
+                router.reload();
+            }
+        }else{
+            loginWithRedirect();
+        }
+    }
+
+    const commentPost = async (id: number) => {
+        if(comment != ""){
+            await post("/comments", {
+                data: {
+                    avatar_url: avatarUrl,
+                    text: comment,
+                    post: {
+                        id: id
+                    },
+                    name: localStorage.getItem("username")
+                }
+            })
+            if(response.status === 200){
+                router.reload();
+            }
+        }else {
+            return;
+        }
+    }
+
+    const openPost = (id: number) => {
+        setIndex(id);
+        setOpenModalComments(true);
+    }
+
+    const findLike = () => {
+        let like = posts.attributes.likes.data.find((like)=>{
+            return like.attributes.name === localStorage.getItem("username");
+        })
+        if(like){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    useEffect(()=>{
+        if(isAuthenticated){
+            console.log(user?.name);
+            localStorage.setItem("username", user?.name as string);
+            localStorage.setItem("user_avatar", user?.picture as string);
+        }
+    }, [])
+
+    useEffect(()=>{
+        if(localStorage.getItem("user_avatar")){
+            setAvatar(localStorage.getItem("user_avatar"));
+        }else{
+            setAvatar("");
+        }
+    }, [])
 
 
     return(
@@ -48,6 +141,7 @@ export default function Post(props: Props){
                         <Text fontSize="sm" color="white" >
                             {posts.attributes.Text}
                         </Text>
+                        <Link href={posts.attributes.link} >Link do projeto</Link>
                     </CardBody>
                     <Image
                         objectFit='cover'
@@ -55,8 +149,9 @@ export default function Post(props: Props){
                         alt='Chakra UI'
                     />
                     <Flex pl="4" pt="4">
-                        <AiOutlineHeart color="white" size={25} style={{cursor: "pointer"}} />
-                        <TfiCommentAlt color="white" size={22} onClick={()=>setOpenModalComments(true)} style={{marginTop: "3px", marginLeft: "10px", cursor: "pointer"}} />
+                        {posts.id === indexPost && like === true || findLike() ? <AiFillHeart size={25} color="#C93131" />
+                        : <AiOutlineHeart color="white" size={25} onClick={()=>likeComment(posts.id)} style={{cursor: "pointer"}} />}
+                        <TfiCommentAlt color="white" size={22} onClick={()=>openPost(posts.id)} style={{marginTop: "3px", marginLeft: "10px", cursor: "pointer"}} />
                         {posts.attributes.likes.data.length > 0 && <Text color="white" cursor="pointer"  fontSize="xs" mt="1" ml="4" onClick={()=>setOpenModal(true)} > {posts.attributes.likes.data.length} Likes</Text>}
                         {posts.attributes.comments.data.length > 0 && <Text color="white" fontSize="xs" onClick={()=>setOpenModalComments(true)} cursor="pointer" mt="1" ml="4" > {posts.attributes.comments.data.length} comments</Text>}
                     </Flex>
@@ -121,10 +216,11 @@ export default function Post(props: Props){
                     />
                     <Flex justifyContent="space-between" px="3" mt="2" mb={posts?.attributes?.comments?.data?.length > 0 ? "2" : "0"} >
                         <Flex>
-                            <AiOutlineHeart color="white" size={25} style={{cursor: "pointer"}} />
-                            <Text color="white" ml="2" cursor="pointer" onClick={()=>setOpenModal(true)}  >1 likes</Text>
+                        {posts.id === indexPost && like === true || findLike() ? <AiFillHeart size={25} color="#C93131" />
+                        : <AiOutlineHeart color="white" size={25} onClick={()=>likeComment(posts.id)} style={{cursor: "pointer"}} />}
+                        {posts.attributes.likes.data.length > 0 && <Text color="white" ml="2" cursor="pointer" onClick={()=>setOpenModal(true)}  >{posts.attributes.likes.data.length} likes</Text>}
                         </Flex>
-                        <Text color="white" >3 commentaries</Text>
+                        {posts.attributes.comments.data.length > 0 && <Text color="white" >{posts.attributes.comments.data.length} commentaries</Text>}
                     </Flex>
                     {posts?.attributes?.comments?.data?.map((comment)=>(
                         <Commentary created_at={comment.attributes.createdAt} avatar_url={comment.attributes.avatar_url} username={comment.attributes.name} content={comment.attributes.text} />
@@ -132,11 +228,18 @@ export default function Post(props: Props){
                 </ModalBody>
 
                 <ModalFooter borderTop="1px solid" borderTopColor="gray.veryLight" px="0" >
-                    <Flex px="3" justifyContent="flex-start" w="100%" >
-                        <Avatar size="sm" name='Dan Abrahmov' mr="3" />
-                        <Input bg="gray.veryLight" border="none" placeholder="write a comment" mr="3" />
-                        <Button bg="gray.middle" color="white" >Send</Button>
-                    </Flex>
+                    {avatarUrl ? <Flex px="3" justifyContent="flex-start" w="100%" >
+                        <Avatar size="sm" name='Dan Abrahmov'src={avatarUrl as string} mr="3" />
+                        <Input bg="gray.veryLight" value={comment} onChange={(e)=>setComment(e.target.value)} border="none" placeholder="write a comment" mr="3" />
+                        <Button bg="gray.middle" isLoading={loading} onClick={()=>commentPost(posts.id)} color="white" >Send</Button>
+                    </Flex> :
+                    <Flex w="100%" justifyContent="flex-start" alignItems="center" px="3" >
+                        <Text color="white" >SignIn to comment this post. 
+                            <Link color="blue.400" onClick={signUp} ml="1" isExternal>
+                                SignIn <ExternalLinkIcon mx='2px' />
+                            </Link>
+                        </Text>
+                    </Flex>}
                 </ModalFooter>
                 </ModalContent>
             </Modal>

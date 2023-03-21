@@ -1,4 +1,5 @@
 interface likeResponse{
+    id: number;
     attributes:{
         avatar_url: string;
         name: string;

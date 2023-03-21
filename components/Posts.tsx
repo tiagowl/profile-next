@@ -32,7 +32,7 @@ export default function Posts(){
             </Box> : postsResponse?.data?.map((post)=>(
             <>
                 {/* Post */}
-                <Post posts={post} />
+                <Post posts={post} handleChange={loadPosts} />
             </>
         ))}        
         </>

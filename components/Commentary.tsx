@@ -25,11 +25,9 @@ export default function Commentary({content, avatar_url, username, likes, create
                 <Text fontSize="sm" color="white" >{content}</Text>
             </Flex>
             <Flex mt="2" >
-                <AiOutlineHeart color="white" size={22} />
-                <Text fontSize="sm" mr="3" ml="3" color="gray.veryLight" >
+                <Text fontSize="sm" mr="3" color="gray.veryLight" >
                     <TimeAgo date={created_at as Date} />
                 </Text>
-                <Text fontSize="sm" color="gray.veryLight" >{likes} like</Text>
             </Flex>
         </Flex>
     );

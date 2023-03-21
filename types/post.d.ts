@@ -10,4 +10,5 @@ export default interface Post{
     image: Image;
     comments: Response<Comment>;
     likes: Like;
+    link: string;
 }

@@ -22,6 +22,7 @@ export default function Home() {
   ]
 
   const [show, setShow] = useState(false);
+  const [avatarUrl, setAvatar] = useState<string | null>();
 
   const {isOpen, onToggle} = useDisclosure();
 
@@ -33,6 +34,14 @@ export default function Home() {
     }
   }, []);
 
+  useEffect(()=>{
+    if(localStorage.getItem("user_avatar")){
+        setAvatar(localStorage.getItem("user_avatar"));
+    }else{
+        setAvatar("");
+    }
+  }, [])
+
   if(show) return (
     <Main>
       <BrowserView>
@@ -40,7 +49,7 @@ export default function Home() {
         <Card borderRadius="1rem" bg="gray.light" mb="3">
           <CardBody padding="4" >
             <Flex>
-              <Avatar size="md" bg="gray.veryLight" />
+              <Avatar size="md" src={avatarUrl as string} bg="gray.veryLight" />
               <Input type="text" size="lg" border="None" bg="gray.middle" ml="2"></Input>
             </Flex>
             <Flex pl="14" mt="3" justifyContent="space-between" >
