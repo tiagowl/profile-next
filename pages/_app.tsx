@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
       domain="dev-21o4k2um2qt8zohi.us.auth0.com"
       clientId="8ongDbfcin57qaQ2SVF7XLaIbeOYH06n"
       authorizationParams={{
-        redirect_uri: "http://localhost:3000"
+        redirect_uri: "https://profile-next-alpha.vercel.app/"
       }}
       >
         <ChakraProvider theme={Theme} >
