@@ -6,6 +6,8 @@ import Theme from "../styles/theme";
 import { Auth0Provider } from '@auth0/auth0-react';
 import "../styles/font.css";
 import "../styles/scrollbar.css";
+import { PostsProvider } from '../providers/posts';
+
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -18,8 +20,10 @@ export default function App({ Component, pageProps }: AppProps) {
       }}
       >
         <ChakraProvider theme={Theme} >
-          <Component {...pageProps} />
-          <Analytics/>
+          <PostsProvider>
+            <Component {...pageProps} />
+            <Analytics/>
+          </PostsProvider>
         </ChakraProvider>
       </Auth0Provider>
     </>

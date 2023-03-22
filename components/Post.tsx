@@ -1,8 +1,8 @@
-import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input, Circle, Link } from "@chakra-ui/react";
+import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input, Link } from "@chakra-ui/react";
 import { BsFillPatchCheckFill, BsThreeDotsVertical } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { TfiCommentAlt } from "react-icons/tfi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Commentary from "./Commentary";
 import Post from "../types/post";
 import { ResponseModel } from "../types/response";
@@ -10,30 +10,27 @@ import TimeAgo from "react-timeago";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import useFetch from "use-http";
-import {useRouter} from "next/router";
+import { PostsContext } from "../providers/posts";
 
 interface Props{
     posts: ResponseModel<Post>,
-    handleChange: () => void
+    handleChange?: () => void
 }
 
-interface PropsHeartIcon{
-    id: number;
-}
 
 export default function Post(props: Props){
 
-    const {isOpen, onToggle, onClose} = useDisclosure();
+    const {onClose} = useDisclosure();
     const [openModal, setOpenModal] = useState(false);
     const [modalComments, setOpenModalComments] = useState(false);
     const posts = props.posts;
-    const { loginWithRedirect, user, isLoading, isAuthenticated } = useAuth0();
+    const { loginWithRedirect, user, isAuthenticated } = useAuth0();
     const [avatarUrl, setAvatar] = useState<string | null>();
     const [like, setLike] = useState(false);
     const [indexPost, setIndex] = useState(0);
-    const { get, post, response, loading} = useFetch(process.env.NEXT_PUBLIC_API);
+    const { post, loading, response} = useFetch(process.env.NEXT_PUBLIC_API);
     const [comment, setComment] = useState("");
-    const router = useRouter();
+    const {fetchPosts} = useContext(PostsContext);
 
     const signUp = () =>{
         loginWithRedirect();
@@ -52,9 +49,6 @@ export default function Post(props: Props){
                     }
                 }
             })
-            if(response.status === 200){
-                router.reload();
-            }
         }else{
             loginWithRedirect();
         }
@@ -72,12 +66,12 @@ export default function Post(props: Props){
                     name: localStorage.getItem("username")
                 }
             })
-            if(response.status === 200){
-                router.reload();
+            if(response.ok){
+                fetchPosts();
             }
         }else {
             return;
-        }
+        }        
     }
 
     const openPost = (id: number) => {
