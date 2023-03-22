@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading, Image, ListItem, Stack, Tag, Text, UnorderedList } from "@chakra-ui/react";
+import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Circle, Flex, Heading, Image, ListItem, Stack, Tag, Text, UnorderedList } from "@chakra-ui/react";
 import skills from "../data/skills";
 import {isMobile} from "react-device-detect";
 import { useEffect, useState } from "react";
@@ -7,6 +7,7 @@ import Formations from "./Formations";
 import {SiChakraui, SiNextdotjs, SiStrapi, SiSupabase} from "react-icons/si"
 import {useRouter} from "next/router";
 import Tools from "./Tools";
+import { BsFillChatRightFill } from "react-icons/bs";
 
 export default function Informations(){
 
@@ -24,6 +25,11 @@ export default function Informations(){
     if(show){
     } return(
         <>
+            <Flex w="100%" display={["none", "flex", "flex"]} >
+              <Circle mb="3" size={8} bg="white" >
+                <BsFillChatRightFill fontSize="1.1rem" color="#363533" />
+              </Circle>
+            </Flex>
             <Card
                 direction="column"
                 overflow='hidden'
