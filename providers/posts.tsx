@@ -27,7 +27,7 @@ export const PostsProvider = (props: Props) => {
 
     const fetchPosts = async () => {
         setLoading(true);
-        fetch(`${process.env.NEXT_PUBLIC_API}/posts?populate=*`)
+        fetch(`${process.env.NEXT_PUBLIC_API}/posts?filters[category][name][$eq]=main&&populate=*`)
         .then((response) => {
             return response.json();
         })
