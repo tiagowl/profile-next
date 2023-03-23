@@ -6,6 +6,7 @@ import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { RiArticleLine, RiPriceTag2Line, RiVideoFill } from "react-icons/ri";
 import { BsFillCalendarWeekFill, BsImage } from "react-icons/bs";
 import { ImList2 } from "react-icons/im";
+import { useRouter } from "next/router";
 
 interface Props{
     children?: ReactNode
@@ -20,6 +21,10 @@ export default function Main({children}: Props){
         { IconColor: "yellow.300", Icon: BsFillCalendarWeekFill, label: "Schedule" }
     ]
 
+    const router = useRouter();
+
+    
+
     const [avatarUrl, setAvatar] = useState("");
 
     useEffect(()=>{
@@ -28,6 +33,7 @@ export default function Main({children}: Props){
         }else{
             setAvatar("");
         }
+        console.log(router);
     }, [])
 
     return(
@@ -39,8 +45,8 @@ export default function Main({children}: Props){
                 <Flex borderRadius="1rem" w={["100%", "47%", "47%"]} direction="column" pr={["0", "1", "1"]} h="auto" mr={["0", "1", "1"]} >
                     <Flex w="100%" justifyContent="center" display={["none", "flex", "flex"]} >
                         <HStack mb="3" spacing="30px" >
-                            <AiOutlineFundProjectionScreen color="white" fontSize="1.8rem" />
-                            <RiArticleLine color="white" fontSize="1.8rem" />
+                            <AiOutlineFundProjectionScreen color={router.pathname === "/" ? "yellow": "white"} style={{cursor: "pointer"}} onClick={()=>router.push("/")} fontSize="1.8rem" />
+                            <RiArticleLine color={router.pathname.includes("articles") ? "yellow": "white"} fontSize="1.8rem" style={{cursor: "pointer"}} onClick={()=>router.push("/articles")} />
                             <RiPriceTag2Line color="white" fontSize="1.8rem" />
                         </HStack>
                     </Flex>

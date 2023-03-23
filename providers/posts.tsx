@@ -4,7 +4,7 @@ import Post from "../types/post";
 
 type PropsPostsProvider = {
     posts: Response<Post>,
-    fetchPosts: ()=>void,
+    fetchPosts: (category: Category)=>Promise<void>,
     loading: boolean
 }
 
@@ -12,7 +12,14 @@ export const PostsContext = createContext<PropsPostsProvider>({
     posts: {
         data: []
     },
-    fetchPosts: () => {},
+    async fetchPosts(category) {
+        return await fetch("").then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            
+        })
+    },
     loading: false
 })
 
@@ -20,14 +27,16 @@ interface Props{
     children?: ReactNode
 }
 
+export type Category = "article"| "main" | "promoted";
+
 export const PostsProvider = (props: Props) => {
 
     const [posts, setPosts] = useState<Response<Post>>({data: []});
     const [loading, setLoading] = useState(false);
 
-    const fetchPosts = async () => {
+    const fetchPosts = async (category : Category) => {
         setLoading(true);
-        fetch(`${process.env.NEXT_PUBLIC_API}/posts?populate=*`)
+        fetch(`${process.env.NEXT_PUBLIC_API}/posts?filters[category][name][$eq]=${category}&&populate=*`)
         .then((response) => {
             return response.json();
         })

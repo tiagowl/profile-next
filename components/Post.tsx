@@ -10,11 +10,13 @@ import TimeAgo from "react-timeago";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import useFetch from "use-http";
-import { PostsContext } from "../providers/posts";
+import { Category, PostsContext } from "../providers/posts";
+
 
 interface Props{
     posts: ResponseModel<Post>,
-    handleChange?: () => void
+    handleChange?: () => void,
+    category: Category;
 }
 
 
@@ -67,7 +69,7 @@ export default function Post(props: Props){
                 }
             })
             if(response.ok){
-                fetchPosts();
+                fetchPosts("main");
             }
         }else {
             return;
@@ -135,7 +137,8 @@ export default function Post(props: Props){
                         <Text fontSize="sm" color="white" >
                             {posts.attributes.Text}
                         </Text>
-                        <Link href={posts.attributes.link} >Link do projeto</Link>
+                        {props.category === "article" ? <Link color="blue.300" >Ler mais</Link> : <Link color="blue.300" href={posts.attributes.link} >Link do projeto</Link>}
+                        
                     </CardBody>
                     <Image
                         objectFit='cover'
