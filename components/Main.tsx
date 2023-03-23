@@ -11,8 +11,6 @@ interface Props{
     children?: ReactNode
 }
 
-
-
 export default function Main({children}: Props){
 
     const tagPosts = [
@@ -38,7 +36,7 @@ export default function Main({children}: Props){
                 <Flex w={["100%", "25%", "25%"]} h="auto" direction="column" mr="4" >
                     <Informations/>
                 </Flex>
-                <Flex className="scrollbar" borderRadius="1rem" w={["100%", "47%", "47%"]} direction="column" pr={["0", "1", "1"]} h="auto" mr={["0", "1", "1"]} >
+                <Flex borderRadius="1rem" w={["100%", "47%", "47%"]} direction="column" pr={["0", "1", "1"]} h="auto" mr={["0", "1", "1"]} >
                     <Flex w="100%" justifyContent="center" display={["none", "flex", "flex"]} >
                         <HStack mb="3" spacing="30px" >
                             <AiOutlineFundProjectionScreen color="white" fontSize="1.8rem" />
@@ -46,23 +44,25 @@ export default function Main({children}: Props){
                             <RiPriceTag2Line color="white" fontSize="1.8rem" />
                         </HStack>
                     </Flex>
-                    <Card borderRadius="1rem" bg="gray.light" mb="3" display={["none", "flex", "flex"]}>
-                        <CardBody padding="4" >
-                            <Flex>
-                            <Avatar size="md" src={avatarUrl as string} bg="gray.veryLight" />
-                            <Input type="text" size="lg" border="None" bg="gray.middle" ml="2"></Input>
-                            </Flex>
-                            <Flex pl="14" mt="3" justifyContent="space-between" >
-                            {tagPosts.map((tag)=>(
-                                <Tag bg="gray.middle">
-                                <TagLeftIcon color={tag.IconColor} as={tag.Icon} />
-                                <TagLabel color="white" >{tag.label}</TagLabel>
-                                </Tag>
-                            ))}
-                            </Flex>
-                        </CardBody>
-                    </Card>
-                    {children}
+                    <Flex flexDirection="column" w="100%" className="scrollbar" >
+                        <Card borderRadius="1rem" bg="gray.light" mb="3" display={["none", "flex", "flex"]}>
+                            <CardBody padding="4" >
+                                <Flex>
+                                <Avatar size="md" src={avatarUrl as string} bg="gray.veryLight" />
+                                <Input type="text" size="lg" border="None" bg="gray.middle" ml="2"></Input>
+                                </Flex>
+                                <Flex pl="14" mt="3" justifyContent="space-between" >
+                                {tagPosts.map((tag)=>(
+                                    <Tag bg="gray.middle">
+                                    <TagLeftIcon color={tag.IconColor} as={tag.Icon} />
+                                    <TagLabel color="white" >{tag.label}</TagLabel>
+                                    </Tag>
+                                ))}
+                                </Flex>
+                            </CardBody>
+                        </Card>
+                        {children}
+                    </Flex>
                 </Flex>
                 <Flex w={["100%", "25%", "25%"]} display={["none", "flex", "flex"]} flexDirection="column" h="auto" >
                     <Flex w="100%" justifyContent="flex-end" display={["none", "flex", "flex"]} >

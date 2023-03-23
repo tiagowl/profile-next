@@ -1,9 +1,6 @@
 import { Box, Skeleton, SkeletonCircle } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
-import useFetch from "use-http";
+import { useContext, useEffect } from "react";
 import { PostsContext } from "../providers/posts";
-import PostType  from "../types/post";
-import { Response } from "../types/response";
 import Post from "./Post";
 
 export default function Posts(){
