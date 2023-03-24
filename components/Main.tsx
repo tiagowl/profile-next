@@ -1,4 +1,4 @@
-import { Avatar, Card, CardBody, Container, Flex, HStack, Input, Tag, TagLabel, TagLeftIcon, Text } from "@chakra-ui/react";
+import { Avatar, Card, CardBody, Container, Flex, HStack, Input, Tag, TagLabel, TagLeftIcon, Text, useDisclosure } from "@chakra-ui/react";
 import Experiences from "./Experiences";
 import Informations from "./Informations";
 import { ReactNode, useEffect, useState } from "react";
@@ -23,9 +23,15 @@ export default function Main({children}: Props){
 
     const router = useRouter();
 
-    
-
     const [avatarUrl, setAvatar] = useState("");
+
+    const notMainPage = () => {
+        if(router.pathname !== "/"){
+            return "5";
+        }else{
+            return "0"
+        }
+    }
 
     useEffect(()=>{
         if(localStorage.getItem("user_avatar")){
@@ -42,12 +48,12 @@ export default function Main({children}: Props){
                 <Flex w={["100%", "25%", "25%"]} h="auto" direction="column" mr="4" >
                     <Informations/>
                 </Flex>
-                <Flex borderRadius="1rem" w={["100%", "47%", "47%"]} direction="column" pr={["0", "1", "1"]} h="auto" mr={["0", "1", "1"]} >
+                <Flex borderRadius="1rem" w={["100%", "47%", "47%"]} direction="column" pr={["0", "1", "1"]} px={[notMainPage(), "0", "0"]} h="auto" mr={["0", "1", "1"]} >
                     <Flex w="100%" justifyContent="center" display={["none", "flex", "flex"]} >
                         <HStack mb="3" spacing="30px" >
                             <AiOutlineFundProjectionScreen color={router.pathname === "/" ? "yellow": "white"} style={{cursor: "pointer"}} onClick={()=>router.push("/")} fontSize="1.8rem" />
                             <RiArticleLine color={router.pathname.includes("articles") ? "yellow": "white"} fontSize="1.8rem" style={{cursor: "pointer"}} onClick={()=>router.push("/articles")} />
-                            <RiPriceTag2Line color="white" fontSize="1.8rem" />
+                            <RiPriceTag2Line color={router.pathname === "/promoted" ? "yellow": "white"} style={{cursor: "pointer"}} onClick={()=>router.push("/promoted")} fontSize="1.8rem" />
                         </HStack>
                     </Flex>
                     <Flex flexDirection="column" w="100%" className="scrollbar" >

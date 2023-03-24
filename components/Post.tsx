@@ -69,7 +69,7 @@ export default function Post(props: Props){
                 }
             })
             if(response.ok){
-                fetchPosts("main");
+                fetchPosts(props.category);
             }
         }else {
             return;
