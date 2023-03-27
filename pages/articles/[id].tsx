@@ -43,7 +43,7 @@ export default function Article(){
                 }
             })
         }else{
-            localStorage.setItem("urlRedirect", router.asPath)
+            sessionStorage.setItem("urlRedirect", router.asPath)
             loginWithRedirect();
         }
     }
@@ -98,7 +98,7 @@ export default function Article(){
     }
 
     const signIn = () => {
-        localStorage.setItem("urlRedirect", router?.asPath)
+        sessionStorage.setItem("urlRedirect", router?.asPath)
         loginWithRedirect();
     }
 
