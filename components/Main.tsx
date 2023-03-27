@@ -76,21 +76,7 @@ export default function Main({children}: Props){
                         {children}
                     </Flex>
                 </Flex>
-                <Flex w={["100%", "25%", "25%"]} display={["none", "flex", "flex"]} flexDirection="column" h="auto" >
-                    <Flex w="100%" justifyContent="flex-end" display={["none", "flex", "flex"]} >
-                        <Tag size='lg' bg="gray.light" mb="2" borderRadius='full'>
-                            <Avatar
-                                src={avatarUrl}
-                                size='xs'
-                                name='Segun Adebayo'
-                                ml={-1}
-                                mr={2}
-                            />
-                            <TagLabel color="white" fontSize="sm" >
-                                Segun
-                            </TagLabel>
-                        </Tag>
-                    </Flex>
+                <Flex w={["100%", "25%", "25%"]} display={["none", "flex", "flex"]} flexDirection="column" h="auto" pt="10" >
                     <Experiences/>
                 </Flex>
             </Flex>

@@ -11,6 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import useFetch from "use-http";
 import { Category, PostsContext } from "../providers/posts";
+import { useRouter } from "next/router";
 
 
 interface Props{
@@ -33,6 +34,7 @@ export default function Post(props: Props){
     const { post, loading, response} = useFetch(process.env.NEXT_PUBLIC_API);
     const [comment, setComment] = useState("");
     const {fetchPosts} = useContext(PostsContext);
+    const router = useRouter();
 
     const signUp = () =>{
         loginWithRedirect();
@@ -137,7 +139,7 @@ export default function Post(props: Props){
                         <Text fontSize="sm" color="white" >
                             {posts.attributes.Text}
                         </Text>
-                        {props.category === "article" ? <Link color="blue.300" >Ler mais</Link> : <Link color="blue.300" href={posts.attributes.link} >Link do projeto</Link>}
+                        {props.category === "article" ? <Link color="blue.300" onClick={()=>router.push(`/articles/${posts?.id}`)} >Ler mais</Link> : <Link color="blue.300" href={posts.attributes.link} >Link do projeto</Link>}
                         
                     </CardBody>
                     <Image

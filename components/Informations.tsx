@@ -1,10 +1,8 @@
-import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Circle, Flex, Heading, Image, ListItem, Slide, Square, Stack, StackDivider, Tag, Text, UnorderedList, useDisclosure } from "@chakra-ui/react";
-import skills from "../data/skills";
+import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Circle, Flex, Heading, Slide, Square, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import {isMobile} from "react-device-detect";
 import { useEffect, useState } from "react";
 import Skills from "./Skills";
 import Formations from "./Formations";
-import {SiChakraui, SiNextdotjs, SiStrapi, SiSupabase} from "react-icons/si"
 import {useRouter} from "next/router";
 import Tools from "./Tools";
 import { BsFillChatRightFill } from "react-icons/bs";
@@ -46,7 +44,7 @@ export default function Informations(){
                 <Stack>
                 <CardHeader position="relative" display="flex" flexDirection="column" alignItems="center" height="12rem" backgroundSize="cover" backgroundImage="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60">
                     <Flex w="100%" justifyContent="flex-end" display={["flex", "none", "none"]} >
-                      <Square borderColor="gray.light" onClick={onToggle} border="1px solid" size="2.5rem" borderRadius="lg" >
+                      <Square color="gray.veryLight" onClick={onToggle} border="1px solid" size="2.5rem" borderRadius="lg" >
                         <HamburgerIcon fontSize="lg" />
                       </Square>
                     </Flex>

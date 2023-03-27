@@ -1,4 +1,4 @@
-interface ResponseModel<T>{
+export interface ResponseModel<T>{
     id: number;
     attributes: T
 }
