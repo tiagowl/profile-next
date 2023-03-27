@@ -24,7 +24,7 @@ export default function Article(){
     const router = useRouter();
     const [like, setLike] = useState(false);
     const [avatarUrl, setAvatar] = useState<string | null>();
-    const { loginWithRedirect } = useAuth0();
+    const { loginWithRedirect, user, isAuthenticated } = useAuth0();
     const [comment, setComment] = useState<string>("");
     const [content, setContent] = useState("");
     const [recomended, setRecomended] = useState<Response<Article>>();
@@ -109,6 +109,14 @@ export default function Article(){
             fetchRecomended();
         }
     }, [router.query.id])
+
+    useEffect(()=>{
+        if(isAuthenticated){
+            console.log(user?.name);
+            localStorage.setItem("username", user?.name as string);
+            localStorage.setItem("user_avatar", user?.picture as string);
+        }
+    }, [])
 
     useEffect(()=>{
         if(localStorage.getItem("user_avatar")){
