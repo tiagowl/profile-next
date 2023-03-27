@@ -119,7 +119,11 @@ export default function Article(){
     }, [])
 
     useEffect(()=>{
-        if(localStorage.getItem("user_avatar")){
+
+        if(isAuthenticated){
+            console.log(user?.name);
+            localStorage.setItem("username", user?.name as string);
+            localStorage.setItem("user_avatar", user?.picture as string);
             setAvatar(localStorage.getItem("user_avatar"));
         }else{
             setAvatar("");
