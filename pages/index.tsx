@@ -1,7 +1,7 @@
-import { Avatar, Card, CardBody, Flex, Input, Tab, TabList, TabPanel, TabPanels, Tabs, Tag, TagLabel, TagLeftIcon, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Card, CardBody, Flex, HStack, Input, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Tag, TagLabel, TagLeftIcon, useDisclosure } from "@chakra-ui/react";
 import Main from "../components/Main";
 import {BsFillCalendarWeekFill, BsImage} from "react-icons/bs";
-import {RiVideoFill} from "react-icons/ri";
+import {RiArticleFill, RiArticleLine, RiPriceTag2Line, RiVideoFill} from "react-icons/ri";
 import {ImList2} from "react-icons/im";
 import {GiHammerBreak} from "react-icons/gi";
 import {BrowserView, MobileView} from "react-device-detect";
@@ -11,18 +11,11 @@ import Formations from "../components/Formations";
 import Experiences from "../components/Experiences";
 import Posts from "../components/Posts";
 import Tools from "../components/Tools";
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 
 export default function Home() {
 
-  const tagPosts = [
-    { IconColor: "green.300", Icon: BsImage, label: "Photo" },
-    { IconColor: "blue.300", Icon: RiVideoFill, label: "Video" },
-    { IconColor: "red.300", Icon: ImList2, label: "Poll" },
-    { IconColor: "yellow.300", Icon: BsFillCalendarWeekFill, label: "Schedule" }
-  ]
-
   const [show, setShow] = useState(false);
-  const [avatarUrl, setAvatar] = useState<string | null>();
 
   const {isOpen, onToggle} = useDisclosure();
 
@@ -34,34 +27,10 @@ export default function Home() {
     }
   }, []);
 
-  useEffect(()=>{
-    if(localStorage.getItem("user_avatar")){
-        setAvatar(localStorage.getItem("user_avatar"));
-    }else{
-        setAvatar("");
-    }
-  }, [])
-
   if(show) return (
     <Main>
       <BrowserView>
         {/* Post input */}
-        <Card borderRadius="1rem" bg="gray.light" mb="3">
-          <CardBody padding="4" >
-            <Flex>
-              <Avatar size="md" src={avatarUrl as string} bg="gray.veryLight" />
-              <Input type="text" size="lg" border="None" bg="gray.middle" ml="2"></Input>
-            </Flex>
-            <Flex pl="14" mt="3" justifyContent="space-between" >
-              {tagPosts.map((tag)=>(
-                <Tag bg="gray.middle">
-                  <TagLeftIcon color={tag.IconColor} as={tag.Icon} />
-                  <TagLabel color="white" >{tag.label}</TagLabel>
-                </Tag>
-              ))}
-            </Flex>
-          </CardBody>
-        </Card>
         <Posts/>
       </BrowserView>
       <MobileView>

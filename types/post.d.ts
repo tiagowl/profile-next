@@ -1,7 +1,7 @@
 import { Comment } from "./comment";
 import { Image } from "./image";
 import { Like } from "./like";
-import { Response } from "./response";
+import { Response, ResponseModel } from "./response";
 
 export default interface Post{
     Text: string;
@@ -11,4 +11,8 @@ export default interface Post{
     comments: Response<Comment>;
     likes: Like;
     link: string;
+}
+
+export interface onePost{
+    data: ResponseModel<Post>
 }
