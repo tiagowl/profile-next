@@ -111,17 +111,19 @@ export default function Article(){
     }, [router.query.id])
 
     useEffect(()=>{
-
         if(isAuthenticated){
             console.log(user?.name);
             localStorage.setItem("username", user?.name as string);
             localStorage.setItem("user_avatar", user?.picture as string);
+        }
+    }, [])
+
+    useEffect(()=>{
+        if(localStorage.getItem("user_avatar")){
             setAvatar(localStorage.getItem("user_avatar"));
         }else{
             setAvatar("");
         }
-
-        console.log(router);
     }, [])
 
 
