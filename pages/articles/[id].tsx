@@ -43,6 +43,7 @@ export default function Article(){
                 }
             })
         }else{
+            localStorage.setItem("urlRedirect", router.asPath)
             loginWithRedirect();
         }
     }
@@ -94,6 +95,11 @@ export default function Article(){
         }else{
             return false;
         }
+    }
+
+    const signIn = () => {
+        localStorage.setItem("urlRedirect", router?.asPath)
+        loginWithRedirect();
     }
 
     useEffect(()=>{
@@ -186,7 +192,7 @@ export default function Article(){
                     <Input value={comment} onChange={(e)=>setComment(e.target.value)} placeholder='What you are thoughts?' mb="2" />
                     {!avatarUrl ? 
                     <Text color="white" mb="10" >SignIn to comment this post. 
-                        <Link color="blue.400" ml="1" isExternal>
+                        <Link color="blue.400" onClick={signIn} ml="1" isExternal>
                             SignIn <ExternalLinkIcon mx='2px' />
                         </Link>
                     </Text> : 

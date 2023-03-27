@@ -11,13 +11,22 @@ import { PostsProvider } from '../providers/posts';
 
 
 export default function App({ Component, pageProps }: AppProps) {
+
+  const url = () => {
+    if (typeof window !== 'undefined') {
+      // Perform localStorage action
+      const item = localStorage.getItem('urlRedirect');
+      return item;
+    }
+  }
+
   return (
     <>
       <Auth0Provider
       domain="dev-21o4k2um2qt8zohi.us.auth0.com"
       clientId="8ongDbfcin57qaQ2SVF7XLaIbeOYH06n"
       authorizationParams={{
-        redirect_uri: `https://profile-next-alpha.vercel.app/`
+        redirect_uri: `https://profile-next-alpha.vercel.app${url}`
       }}
       >
         <ChakraProvider theme={Theme} >
