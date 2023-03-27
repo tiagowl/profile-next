@@ -37,6 +37,7 @@ export default function Post(props: Props){
     const router = useRouter();
 
     const signUp = () =>{
+        sessionStorage.setItem("urlRedirect", router?.asPath)
         loginWithRedirect();
     }
 
@@ -54,6 +55,7 @@ export default function Post(props: Props){
                 }
             })
         }else{
+            sessionStorage.setItem("urlRedirect", router?.asPath)
             loginWithRedirect();
         }
     }
