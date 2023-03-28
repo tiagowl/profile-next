@@ -14,6 +14,7 @@ import { onePost } from "../../types/post";
 import { useAuth0 } from "@auth0/auth0-react";
 import TimeAgo from "react-timeago";
 import Moment from "react-moment";
+import Head from "next/head";
 
 export default function Article(){
 
@@ -74,10 +75,10 @@ export default function Article(){
     }
     
     const fetchArticle = async () =>{
-        const data = await get(`/articles?filters[post][id][$eq]=${router?.query?.id}`);
-        if(response.ok){
-            setArticle(data);  
-        } 
+
+        const data = await fetch(`/articles?filters[post][id][$eq]=${router?.query?.id}`, {cache: "no-store"});
+        const toJson = await data.json();
+        setArticle(toJson);
     }
 
     const fetchPost = async () => {
@@ -120,6 +121,13 @@ export default function Article(){
 
 
     return(
+        <>
+        <Head>
+            <title></title>
+            <meta name="description" content={article?.data[0]?.attributes?.text?.substring(0, 298)} />
+            <meta property="og:title" content={article?.data[0]?.attributes?.title}  />
+            <meta name="og:description" content={article?.data[0]?.attributes?.text?.substring(0, 298)} />
+        </Head>
         <Main>{loading ? <Spinner color="white" margin="0 auto" mt="5" /> : <>
         
             <Flex w="100%" justifyContent="flex-start" mb="6" display={["none", "flex", "flex"]} >
@@ -209,5 +217,6 @@ export default function Article(){
                 </DrawerContent>
             </Drawer>
         </Main>
+        </>
     )
 }
