@@ -76,7 +76,7 @@ export default function Article(){
     
     const fetchArticle = async () =>{
 
-        const data = await fetch(`/articles?filters[post][id][$eq]=${router?.query?.id}`, {cache: "no-store"});
+        const data = await fetch(`${process.env.NEXT_PUBLIC_API}/articles?filters[post][id][$eq]=${router?.query?.id}`, {cache: "no-store"});
         const toJson = await data.json();
         setArticle(toJson);
     }
