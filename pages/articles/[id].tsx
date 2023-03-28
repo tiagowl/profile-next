@@ -123,7 +123,7 @@ export default function Article(){
     return(
         <>
         <Head>
-            <title></title>
+            <title>{article?.data[0]?.attributes?.title}</title>
             <meta name="description" content={article?.data[0]?.attributes?.text?.substring(0, 298)} />
             <meta property="og:title" content={article?.data[0]?.attributes?.title}  />
             <meta name="og:description" content={article?.data[0]?.attributes?.text?.substring(0, 298)} />
