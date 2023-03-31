@@ -6,3 +6,19 @@
     font-size: 1.5rem;
     font-weight: bold;
 }
+
+.code{
+    background-color: rgb(42, 36, 82);
+    padding-bottom: 1.2rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.code-text{
+    font-size: 0.8rem;
+}
+
+.ul{
+    list-style: circle !important;
+}

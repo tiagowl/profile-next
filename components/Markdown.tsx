@@ -13,6 +13,13 @@ export default function Markdown({text}: MarkdownProps){
                                     return(
                                         <h3 className="h3" >{children}</h3>
                                     )
+                                },
+                                code({children, ...props}){
+                                    return(
+                                        <div className="code" >
+                                            <code className="code-text" >{children}</code>
+                                        </div>
+                                    )
                                 }
                         }}/>
     )
