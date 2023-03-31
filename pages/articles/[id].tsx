@@ -127,9 +127,11 @@ export default function Article(){
             <meta name="language-lp" content="pt-BR" />
             <meta property="og:locale" content="pt-BR" />
             <meta property="og:type" content="article" />
-            <meta name="description" content={article?.data[0]?.attributes?.text?.substring(0, 298)} />
-            <meta property="og:title" content={article?.data[0]?.attributes?.title}  />
-            <meta property="og:description" content={article?.data[0]?.attributes?.text?.substring(0, 298)} />
+            {article && <>
+                <meta name="description" content={article?.data[0]?.attributes?.text?.substring(0, 298)} />
+                <meta property="og:title" content={article?.data[0]?.attributes?.title}  />
+                <meta property="og:description" content={article?.data[0]?.attributes?.text?.substring(0, 298)} />
+            </>}
         </Head>
         <Main>{loading ? <Spinner color="white" margin="0 auto" mt="5" /> : <>
         
