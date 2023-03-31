@@ -15,11 +15,15 @@ import TimeAgo from "react-timeago";
 import Moment from "react-moment";
 import Head from "next/head";
 import Markdown from "../../components/Markdown";
+import { GetServerSideProps } from "next";
 
-export default function Article(){
+interface ArticleProps{
+    article: Response<Article>
+}
+
+export default function Article({article}: ArticleProps){
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [article, setArticle] = useState<Response<Article>>();
     const { post, loading, response, get} = useFetch(process.env.NEXT_PUBLIC_API);
     const [currentPost, setPost] = useState<onePost>();
     const router = useRouter();
@@ -74,12 +78,12 @@ export default function Article(){
         if(response.ok) setRecomended(data);
     }
     
-    const fetchArticle = async () =>{
+    // const fetchArticle = async () =>{
 
-        const data = await fetch(`${process.env.NEXT_PUBLIC_API}/articles?filters[post][id][$eq]=${router?.query?.id}`, {cache: "no-store"});
-        const toJson = await data.json();
-        setArticle(toJson);
-    }
+    //     const data = await fetch(`${process.env.NEXT_PUBLIC_API}/articles?filters[post][id][$eq]=${router?.query?.id}`, {cache: "no-store"});
+    //     const toJson = await data.json();
+    //     setArticle(toJson);
+    // }
 
     const fetchPost = async () => {
         let data = await get(`/posts/${router?.query?.id}?populate=*`);
@@ -105,7 +109,7 @@ export default function Article(){
 
     useEffect(()=>{
         if(router.query.id){
-            fetchArticle();
+            // fetchArticle();
             fetchPost();
             fetchRecomended();
         }
@@ -219,3 +223,15 @@ export default function Article(){
         </>
     )
 }
+
+export async function getServerSideProps(context: { query: { id: any; }; }) {
+
+    const {id} = context.query;
+
+    // Fetch data from external API
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/articles?filters[post][id][$eq]=${id}`);
+    const article = await res.json()
+  
+    // Pass data to the page via props
+    return { props: { article } }
+  }
