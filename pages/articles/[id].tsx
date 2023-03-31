@@ -9,12 +9,12 @@ import { Response } from "../../types/response";
 import { Article } from "../../types/article";
 import useFetch from "use-http";
 import { useRouter } from "next/router";
-import ReactMarkdown from "react-markdown";
 import { onePost } from "../../types/post";
 import { useAuth0 } from "@auth0/auth0-react";
 import TimeAgo from "react-timeago";
 import Moment from "react-moment";
 import Head from "next/head";
+import Markdown from "../../components/Markdown";
 
 export default function Article(){
 
@@ -76,7 +76,7 @@ export default function Article(){
     
     const fetchArticle = async () =>{
 
-        const data = await fetch(`/articles?filters[post][id][$eq]=${router?.query?.id}`, {cache: "no-store"});
+        const data = await fetch(`${process.env.NEXT_PUBLIC_API}/articles?filters[post][id][$eq]=${router?.query?.id}`, {cache: "no-store"});
         const toJson = await data.json();
         setArticle(toJson);
     }
@@ -142,8 +142,7 @@ export default function Article(){
                 <Heading size="lg" mb="6" textAlign={["center", "left", "left"]} color="white" >{article?.data[0]?.attributes?.title}</Heading>
 
                 <Flex color="white" mb="3" flexDirection="column">
-                    <ReactMarkdown className="lineBreak"
-                                   children={article?.data[0]?.attributes?.text} />
+                    <Markdown text={article?.data[0]?.attributes?.text} />
                 </Flex>
             </Flex>
                 
