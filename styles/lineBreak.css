@@ -1,3 +1,8 @@
 .lineBreak{
     white-space: pre-wrap;
 }
+
+.h3{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
