@@ -59,8 +59,8 @@ export default function Informations(){
                 </CardBody>
 
                 <CardFooter pt="2">
-                    <Button onClick={()=> router.push("https://www.linkedin.com/in/tiagowl/")} variant='solid' w="100%" color="white" bg='gray.veryLight'>
-                    Linkedin
+                    <Button onClick={()=> router.push("https://github.com/tiagowl")} variant='solid' w="100%" color="white" bg='gray.veryLight'>
+                    Github
                     </Button>
                 </CardFooter>
                 </Stack>
