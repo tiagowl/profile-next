@@ -1,5 +1,6 @@
 const skills = ["React", 
-                "Vue", 
+                "Vue",
+                "React Native", 
                 "Node", 
                 "Bootstrap", 
                 "Chakra UI", 
@@ -9,7 +10,6 @@ const skills = ["React",
                 "Adonis", 
                 "Nest", 
                 "Redux",
-                "Headless CMS's",
-                "React Native"];
+                "Headless CMS's"];
 
 export default skills;
