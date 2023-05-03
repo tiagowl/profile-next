@@ -20,6 +20,11 @@ export default function Markdown({text}: MarkdownProps){
                                             <code className="code-text" >{children}</code>
                                         </div>
                                     )
+                                },
+                                a({children, ...props}){
+                                    return(
+                                        <a {...props} className="a" >{children}</a>
+                                    )
                                 }
                         }}/>
     )

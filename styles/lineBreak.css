@@ -22,3 +22,9 @@
 .ul{
     list-style: circle !important;
 }
+
+.a{
+    font-weight: bold;
+    margin-top: 2rem;
+    font-size: 1rem;
+}

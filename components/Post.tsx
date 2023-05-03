@@ -1,4 +1,4 @@
-import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input, Link } from "@chakra-ui/react";
+import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input, Link, Collapse } from "@chakra-ui/react";
 import { BsFillPatchCheckFill, BsThreeDotsVertical } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { TfiCommentAlt } from "react-icons/tfi";
@@ -12,6 +12,7 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 import useFetch from "use-http";
 import { Category, PostsContext } from "../providers/posts";
 import { useRouter } from "next/router";
+import Markdown from "./Markdown";
 
 
 interface Props{
@@ -35,11 +36,14 @@ export default function Post(props: Props){
     const [comment, setComment] = useState("");
     const {fetchPosts} = useContext(PostsContext);
     const router = useRouter();
+    const [showMore, setShowMore] = useState(false);
 
     const signUp = () =>{
         sessionStorage.setItem("urlRedirect", router?.asPath)
         loginWithRedirect();
     }
+
+    const handleShowMore = () => setShowMore(!showMore)
 
     const likeComment = async (id: number) => {
         if(avatarUrl != ""){
@@ -139,10 +143,14 @@ export default function Post(props: Props){
                     </CardHeader>
                     <CardBody pt="0" >
                         <Text fontSize="sm" color="white" >
-                            {posts.attributes.Text}
+                            <Collapse startingHeight={40} in={showMore}>
+                                <Markdown text={posts.attributes.Text}/>
+                                {props.category === "article" && <Link onClick={()=>router.push(`/articles/${posts.id}`)} color="white" fontWeight="bold" >Ver Mais</Link>}
+                            </Collapse>
+                            <Button size='sm' bg="gray.middle" onClick={handleShowMore} mt='1rem'>
+                                Show {showMore ? 'Less' : 'More'}
+                            </Button>
                         </Text>
-                        {props.category === "article" ? <Link color="blue.300" onClick={()=>router.push(`/articles/${posts?.id}`)} >Ler mais</Link> : <Link color="blue.300" href={posts.attributes.link} >Link do projeto</Link>}
-                        
                     </CardBody>
                     <Image
                         objectFit='cover'
