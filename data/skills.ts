@@ -1,6 +1,5 @@
 const skills = ["React", 
-                "Vue",
-                "React Native", 
+                "Vue", 
                 "Node", 
                 "Bootstrap", 
                 "Chakra UI", 
