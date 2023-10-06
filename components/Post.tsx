@@ -1,6 +1,7 @@
 import { Avatar, Box, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Text, Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useDisclosure, ModalFooter, Button, Input, Link, Collapse } from "@chakra-ui/react";
 import { BsFillPatchCheckFill, BsThreeDotsVertical } from "react-icons/bs";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineClose } from "react-icons/ai";
+import {GrClose} from "react-icons/gr";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { useContext, useEffect, useState } from "react";
 import Commentary from "./Commentary";
@@ -192,10 +193,8 @@ export default function Post(props: Props){
             </Modal>
             <Modal isOpen={modalComments} size="xl" onClose={onClose}>
                 <ModalOverlay />
-                <ModalContent bg="gray.light" >
-                <ModalHeader pb="8" ></ModalHeader>
-                <ModalCloseButton color="white" onClick={()=>setOpenModalComments(false)} />
-                <ModalBody borderTop="1px solid" borderTopColor="gray.veryLight" px="0" >
+                <ModalContent bg="gray.light" pt="0.5rem" pb="0" >
+                <ModalBody px="0" >
                     <Flex px="2" >
                             <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
                                 <Avatar borderWidth="3px" borderStyle="solid" borderColor="gray.dark" name='Segun Adebayo' src='/avatar_profile.jpg' />
@@ -212,7 +211,8 @@ export default function Post(props: Props){
                                 variant='ghost'
                                 colorScheme='gray'
                                 aria-label='See menu'
-                                icon={<BsThreeDotsVertical />}
+                                onClick={()=>setOpenModalComments(false)}
+                                icon={<GrClose size={17} color="#000" />}
                             />
                     </Flex>
                     <Flex px="2" mt="2" mb="2" >
